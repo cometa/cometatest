@@ -33,3 +33,13 @@ Use the optional --dep flag to specify the bank module.
 ignite scaffold module devices --dep bank
 ```
 This command creates the x/devices directory and imports the devices module into the blockchain in the app/app.go directory.
+
+### Create repo
+Store  project in a git repo:
+```git add .
+git commit -m "scaffold cometa chain and module"
+
+git remote add origin git@github.com:cometa/cometa.git
+git branch -M main
+git push -u origin main
+```
