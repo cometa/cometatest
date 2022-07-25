@@ -1,9 +1,11 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { NextDevice } from "./module/types/devices/next_device"
 import { Params } from "./module/types/devices/params"
+import { StoredDevices } from "./module/types/devices/stored_devices"
 
 
-export { Params };
+export { NextDevice, Params, StoredDevices };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -42,9 +44,14 @@ function getStructure(template) {
 const getDefaultState = () => {
 	return {
 				Params: {},
+				StoredDevices: {},
+				StoredDevicesAll: {},
+				NextDevice: {},
 				
 				_Structure: {
+						NextDevice: getStructure(NextDevice.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
+						StoredDevices: getStructure(StoredDevices.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -78,6 +85,24 @@ export default {
 						(<any> params).query=null
 					}
 			return state.Params[JSON.stringify(params)] ?? {}
+		},
+				getStoredDevices: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredDevices[JSON.stringify(params)] ?? {}
+		},
+				getStoredDevicesAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.StoredDevicesAll[JSON.stringify(params)] ?? {}
+		},
+				getNextDevice: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.NextDevice[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -130,6 +155,76 @@ export default {
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStoredDevices({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredDevices( key.index)).data
+				
+					
+				commit('QUERY', { query: 'StoredDevices', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredDevices', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredDevices']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredDevices API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryStoredDevicesAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryStoredDevicesAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryStoredDevicesAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'StoredDevicesAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryStoredDevicesAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getStoredDevicesAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryStoredDevicesAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryNextDevice({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryNextDevice()).data
+				
+					
+				commit('QUERY', { query: 'NextDevice', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryNextDevice', payload: { options: { all }, params: {...key},query }})
+				return getters['getNextDevice']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryNextDevice API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

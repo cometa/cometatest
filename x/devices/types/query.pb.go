@@ -6,7 +6,7 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-sdk/types/query"
+	query "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
@@ -113,33 +113,320 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
+type QueryGetStoredDevicesRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (m *QueryGetStoredDevicesRequest) Reset()         { *m = QueryGetStoredDevicesRequest{} }
+func (m *QueryGetStoredDevicesRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetStoredDevicesRequest) ProtoMessage()    {}
+func (*QueryGetStoredDevicesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9ef0082d764adb4, []int{2}
+}
+func (m *QueryGetStoredDevicesRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetStoredDevicesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetStoredDevicesRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetStoredDevicesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetStoredDevicesRequest.Merge(m, src)
+}
+func (m *QueryGetStoredDevicesRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetStoredDevicesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetStoredDevicesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetStoredDevicesRequest proto.InternalMessageInfo
+
+func (m *QueryGetStoredDevicesRequest) GetIndex() string {
+	if m != nil {
+		return m.Index
+	}
+	return ""
+}
+
+type QueryGetStoredDevicesResponse struct {
+	StoredDevices StoredDevices `protobuf:"bytes,1,opt,name=storedDevices,proto3" json:"storedDevices"`
+}
+
+func (m *QueryGetStoredDevicesResponse) Reset()         { *m = QueryGetStoredDevicesResponse{} }
+func (m *QueryGetStoredDevicesResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetStoredDevicesResponse) ProtoMessage()    {}
+func (*QueryGetStoredDevicesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9ef0082d764adb4, []int{3}
+}
+func (m *QueryGetStoredDevicesResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetStoredDevicesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetStoredDevicesResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetStoredDevicesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetStoredDevicesResponse.Merge(m, src)
+}
+func (m *QueryGetStoredDevicesResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetStoredDevicesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetStoredDevicesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetStoredDevicesResponse proto.InternalMessageInfo
+
+func (m *QueryGetStoredDevicesResponse) GetStoredDevices() StoredDevices {
+	if m != nil {
+		return m.StoredDevices
+	}
+	return StoredDevices{}
+}
+
+type QueryAllStoredDevicesRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllStoredDevicesRequest) Reset()         { *m = QueryAllStoredDevicesRequest{} }
+func (m *QueryAllStoredDevicesRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllStoredDevicesRequest) ProtoMessage()    {}
+func (*QueryAllStoredDevicesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9ef0082d764adb4, []int{4}
+}
+func (m *QueryAllStoredDevicesRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllStoredDevicesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllStoredDevicesRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllStoredDevicesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllStoredDevicesRequest.Merge(m, src)
+}
+func (m *QueryAllStoredDevicesRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllStoredDevicesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllStoredDevicesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllStoredDevicesRequest proto.InternalMessageInfo
+
+func (m *QueryAllStoredDevicesRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllStoredDevicesResponse struct {
+	StoredDevices []StoredDevices     `protobuf:"bytes,1,rep,name=storedDevices,proto3" json:"storedDevices"`
+	Pagination    *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllStoredDevicesResponse) Reset()         { *m = QueryAllStoredDevicesResponse{} }
+func (m *QueryAllStoredDevicesResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllStoredDevicesResponse) ProtoMessage()    {}
+func (*QueryAllStoredDevicesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9ef0082d764adb4, []int{5}
+}
+func (m *QueryAllStoredDevicesResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllStoredDevicesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllStoredDevicesResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllStoredDevicesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllStoredDevicesResponse.Merge(m, src)
+}
+func (m *QueryAllStoredDevicesResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllStoredDevicesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllStoredDevicesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllStoredDevicesResponse proto.InternalMessageInfo
+
+func (m *QueryAllStoredDevicesResponse) GetStoredDevices() []StoredDevices {
+	if m != nil {
+		return m.StoredDevices
+	}
+	return nil
+}
+
+func (m *QueryAllStoredDevicesResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryGetNextDeviceRequest struct {
+}
+
+func (m *QueryGetNextDeviceRequest) Reset()         { *m = QueryGetNextDeviceRequest{} }
+func (m *QueryGetNextDeviceRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetNextDeviceRequest) ProtoMessage()    {}
+func (*QueryGetNextDeviceRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9ef0082d764adb4, []int{6}
+}
+func (m *QueryGetNextDeviceRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetNextDeviceRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetNextDeviceRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetNextDeviceRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetNextDeviceRequest.Merge(m, src)
+}
+func (m *QueryGetNextDeviceRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetNextDeviceRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetNextDeviceRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetNextDeviceRequest proto.InternalMessageInfo
+
+type QueryGetNextDeviceResponse struct {
+	NextDevice NextDevice `protobuf:"bytes,1,opt,name=NextDevice,proto3" json:"NextDevice"`
+}
+
+func (m *QueryGetNextDeviceResponse) Reset()         { *m = QueryGetNextDeviceResponse{} }
+func (m *QueryGetNextDeviceResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetNextDeviceResponse) ProtoMessage()    {}
+func (*QueryGetNextDeviceResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f9ef0082d764adb4, []int{7}
+}
+func (m *QueryGetNextDeviceResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetNextDeviceResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetNextDeviceResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetNextDeviceResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetNextDeviceResponse.Merge(m, src)
+}
+func (m *QueryGetNextDeviceResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetNextDeviceResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetNextDeviceResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetNextDeviceResponse proto.InternalMessageInfo
+
+func (m *QueryGetNextDeviceResponse) GetNextDevice() NextDevice {
+	if m != nil {
+		return m.NextDevice
+	}
+	return NextDevice{}
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "cometa.devices.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "cometa.devices.QueryParamsResponse")
+	proto.RegisterType((*QueryGetStoredDevicesRequest)(nil), "cometa.devices.QueryGetStoredDevicesRequest")
+	proto.RegisterType((*QueryGetStoredDevicesResponse)(nil), "cometa.devices.QueryGetStoredDevicesResponse")
+	proto.RegisterType((*QueryAllStoredDevicesRequest)(nil), "cometa.devices.QueryAllStoredDevicesRequest")
+	proto.RegisterType((*QueryAllStoredDevicesResponse)(nil), "cometa.devices.QueryAllStoredDevicesResponse")
+	proto.RegisterType((*QueryGetNextDeviceRequest)(nil), "cometa.devices.QueryGetNextDeviceRequest")
+	proto.RegisterType((*QueryGetNextDeviceResponse)(nil), "cometa.devices.QueryGetNextDeviceResponse")
 }
 
 func init() { proto.RegisterFile("devices/query.proto", fileDescriptor_f9ef0082d764adb4) }
 
 var fileDescriptor_f9ef0082d764adb4 = []byte{
-	// 281 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x90, 0x31, 0x4b, 0xc4, 0x30,
-	0x14, 0xc7, 0x5b, 0xd1, 0x0e, 0x11, 0x1c, 0x72, 0xa5, 0x1c, 0x45, 0xa2, 0xd4, 0x45, 0x1c, 0x1a,
-	0xef, 0xf4, 0x13, 0xdc, 0xea, 0xa2, 0x37, 0xba, 0xa5, 0xf5, 0x51, 0x0a, 0xb6, 0x2f, 0x6d, 0x72,
-	0x87, 0xe7, 0xe8, 0x27, 0x10, 0xfc, 0x52, 0x37, 0x1e, 0xb8, 0x38, 0x89, 0xb4, 0x7e, 0x10, 0xb9,
-	0x24, 0x0a, 0x55, 0x70, 0x0b, 0xef, 0xfd, 0x7e, 0x7f, 0xfe, 0x2f, 0x64, 0x74, 0x07, 0xcb, 0x32,
-	0x07, 0xc5, 0x9b, 0x05, 0xb4, 0xab, 0x54, 0xb6, 0xa8, 0x91, 0x1e, 0xe4, 0x58, 0x81, 0x16, 0xa9,
-	0xdb, 0xc5, 0x61, 0x81, 0x05, 0x9a, 0x15, 0xdf, 0xbe, 0x2c, 0x15, 0x1f, 0x16, 0x88, 0xc5, 0x3d,
-	0x70, 0x21, 0x4b, 0x2e, 0xea, 0x1a, 0xb5, 0xd0, 0x25, 0xd6, 0xca, 0x6d, 0xcf, 0x72, 0x54, 0x15,
-	0x2a, 0x9e, 0x09, 0x05, 0x36, 0x9c, 0x2f, 0x27, 0x19, 0x68, 0x31, 0xe1, 0x52, 0x14, 0x65, 0x6d,
-	0x60, 0xc7, 0x86, 0xdf, 0x25, 0xa4, 0x68, 0x45, 0xe5, 0x12, 0x92, 0x90, 0xd0, 0x9b, 0xad, 0x77,
-	0x6d, 0x86, 0x73, 0x68, 0x16, 0xa0, 0x74, 0x72, 0x45, 0x46, 0x83, 0xa9, 0x92, 0x58, 0x2b, 0xa0,
-	0x97, 0x24, 0xb0, 0xf2, 0xd8, 0x3f, 0xf6, 0x4f, 0xf7, 0xa7, 0x51, 0x3a, 0xbc, 0x21, 0xb5, 0xfc,
-	0x6c, 0x77, 0xfd, 0x7e, 0xe4, 0xcd, 0x1d, 0x3b, 0x7d, 0x24, 0x7b, 0x26, 0x8c, 0x36, 0x24, 0xb0,
-	0x00, 0x4d, 0x7e, 0x8b, 0x7f, 0x3b, 0xc4, 0x27, 0xff, 0x32, 0xb6, 0x51, 0xc2, 0x9e, 0x5e, 0x3f,
-	0x5f, 0x76, 0xc6, 0x34, 0xe2, 0x16, 0xe6, 0xc3, 0x23, 0x67, 0xe7, 0xeb, 0x8e, 0xf9, 0x9b, 0x8e,
-	0xf9, 0x1f, 0x1d, 0xf3, 0x9f, 0x7b, 0xe6, 0x6d, 0x7a, 0xe6, 0xbd, 0xf5, 0xcc, 0xbb, 0x8d, 0x9c,
-	0xf0, 0xf0, 0xa3, 0xe8, 0x95, 0x04, 0x95, 0x05, 0xe6, 0x5f, 0x2e, 0xbe, 0x02, 0x00, 0x00, 0xff,
-	0xff, 0x86, 0x0e, 0x2a, 0x95, 0xb4, 0x01, 0x00, 0x00,
+	// 558 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x94, 0x41, 0x6b, 0x13, 0x41,
+	0x14, 0xc7, 0xb3, 0xb5, 0x0d, 0xf8, 0xa4, 0x22, 0xd3, 0x10, 0xda, 0x6d, 0xb2, 0x96, 0x2d, 0xc4,
+	0x5a, 0x74, 0xc7, 0xd6, 0x7e, 0x00, 0x5b, 0xc4, 0x22, 0x82, 0xd4, 0x78, 0xf3, 0xa0, 0x4c, 0x92,
+	0x71, 0x89, 0x6c, 0x76, 0x36, 0x99, 0x69, 0x49, 0x11, 0x2f, 0x9e, 0x3c, 0x0a, 0x1e, 0xbc, 0xf8,
+	0x2d, 0xbc, 0x7b, 0xee, 0xb1, 0xe0, 0xc5, 0x93, 0x48, 0xe2, 0x07, 0x91, 0xcc, 0xbc, 0x35, 0x3b,
+	0x9b, 0x6c, 0x2d, 0xde, 0x92, 0x79, 0xff, 0xf7, 0x7f, 0xbf, 0x37, 0xef, 0xcd, 0xc2, 0x4a, 0x87,
+	0x9f, 0x74, 0xdb, 0x5c, 0xd2, 0xfe, 0x31, 0x1f, 0x9c, 0x06, 0xc9, 0x40, 0x28, 0x41, 0xae, 0xb7,
+	0x45, 0x8f, 0x2b, 0x16, 0x60, 0xcc, 0xad, 0x84, 0x22, 0x14, 0x3a, 0x44, 0x27, 0xbf, 0x8c, 0xca,
+	0xad, 0x85, 0x42, 0x84, 0x11, 0xa7, 0x2c, 0xe9, 0x52, 0x16, 0xc7, 0x42, 0x31, 0xd5, 0x15, 0xb1,
+	0xc4, 0xe8, 0x76, 0x5b, 0xc8, 0x9e, 0x90, 0xb4, 0xc5, 0x24, 0x37, 0xe6, 0xf4, 0x64, 0xa7, 0xc5,
+	0x15, 0xdb, 0xa1, 0x09, 0x0b, 0xbb, 0xb1, 0x16, 0xa3, 0xb6, 0x92, 0x42, 0x24, 0x6c, 0xc0, 0x7a,
+	0xa9, 0x43, 0x2d, 0x3d, 0x95, 0x4a, 0x0c, 0x78, 0xe7, 0x15, 0xfe, 0xc5, 0xe8, 0x5a, 0x1a, 0x8d,
+	0xf9, 0x50, 0x61, 0xcc, 0x84, 0xfc, 0x0a, 0x90, 0x67, 0x93, 0x82, 0x47, 0xda, 0xad, 0xc9, 0xfb,
+	0xc7, 0x5c, 0x2a, 0xff, 0x09, 0xac, 0x58, 0xa7, 0x32, 0x11, 0xb1, 0xe4, 0x64, 0x0f, 0xca, 0xa6,
+	0xea, 0xaa, 0xb3, 0xe1, 0x6c, 0x5d, 0xdb, 0xad, 0x06, 0x76, 0xf3, 0x81, 0xd1, 0x1f, 0x2c, 0x9e,
+	0xfd, 0xbc, 0x59, 0x6a, 0xa2, 0xd6, 0xdf, 0x83, 0x9a, 0x36, 0x3b, 0xe4, 0xea, 0xb9, 0xa6, 0x7b,
+	0x68, 0xd4, 0x58, 0x8c, 0x54, 0x60, 0xa9, 0x1b, 0x77, 0xf8, 0x50, 0x9b, 0x5e, 0x6d, 0x9a, 0x3f,
+	0xfe, 0x1b, 0xa8, 0x17, 0x64, 0x21, 0xcc, 0x63, 0x58, 0x96, 0xd9, 0x00, 0x32, 0xd5, 0xf3, 0x4c,
+	0x56, 0x36, 0xa2, 0xd9, 0x99, 0xfe, 0x6b, 0x24, 0xdc, 0x8f, 0xa2, 0xb9, 0x84, 0x8f, 0x00, 0xa6,
+	0x73, 0xc0, 0x3a, 0x8d, 0xc0, 0x0c, 0x2d, 0x98, 0x0c, 0x2d, 0x30, 0x1b, 0x81, 0x43, 0x0b, 0x8e,
+	0x58, 0xc8, 0x31, 0xb7, 0x99, 0xc9, 0xf4, 0xbf, 0x3a, 0xd8, 0xd4, 0x6c, 0xa1, 0xe2, 0xa6, 0xae,
+	0xfc, 0x5f, 0x53, 0xe4, 0xd0, 0x82, 0x5e, 0xd0, 0xd0, 0xb7, 0xfe, 0x09, 0x6d, 0x38, 0x2c, 0xea,
+	0x75, 0x58, 0x4b, 0x27, 0xf1, 0x94, 0x0f, 0x95, 0xf1, 0x4f, 0x37, 0xe5, 0x25, 0xb8, 0xf3, 0x82,
+	0xd8, 0xce, 0x03, 0x80, 0xe9, 0x29, 0x5e, 0x9c, 0x9b, 0xef, 0x65, 0xaa, 0xc0, 0x46, 0x32, 0x39,
+	0xbb, 0xdf, 0x16, 0x61, 0x49, 0x17, 0x20, 0x7d, 0x28, 0x9b, 0xf5, 0x22, 0x7e, 0xde, 0x61, 0x76,
+	0x83, 0xdd, 0xcd, 0x0b, 0x35, 0x06, 0xcf, 0xf7, 0xde, 0x7f, 0xff, 0xfd, 0x69, 0x61, 0x95, 0x54,
+	0xa9, 0x11, 0x53, 0xfb, 0x6d, 0x91, 0x2f, 0x0e, 0x2c, 0x5b, 0x37, 0x4d, 0xee, 0xcc, 0xb5, 0x2d,
+	0xd8, 0x6c, 0xf7, 0xee, 0x25, 0xd5, 0x88, 0x13, 0x68, 0x9c, 0x2d, 0xd2, 0xc8, 0xe3, 0xd8, 0x8f,
+	0x9a, 0xbe, 0xd5, 0x2f, 0xe4, 0x1d, 0xf9, 0xec, 0xc0, 0x0d, 0xcb, 0x69, 0x3f, 0x8a, 0x0a, 0x08,
+	0x0b, 0x36, 0xbb, 0x80, 0xb0, 0x68, 0x3d, 0xfd, 0x86, 0x26, 0xdc, 0x20, 0xde, 0xc5, 0x84, 0xe4,
+	0x83, 0x93, 0x1d, 0x3c, 0xb9, 0x5d, 0x74, 0x0f, 0x33, 0xfb, 0xe4, 0x6e, 0x5f, 0x46, 0x8a, 0x34,
+	0x9b, 0x9a, 0xa6, 0x4e, 0xd6, 0xf3, 0x34, 0x99, 0xcf, 0xdc, 0xc1, 0xbd, 0xb3, 0x91, 0xe7, 0x9c,
+	0x8f, 0x3c, 0xe7, 0xd7, 0xc8, 0x73, 0x3e, 0x8e, 0xbd, 0xd2, 0xf9, 0xd8, 0x2b, 0xfd, 0x18, 0x7b,
+	0xa5, 0x17, 0x55, 0xcc, 0x1a, 0xfe, 0xcd, 0x53, 0xa7, 0x09, 0x97, 0xad, 0xb2, 0xfe, 0x32, 0xde,
+	0xff, 0x13, 0x00, 0x00, 0xff, 0xff, 0x98, 0xd3, 0x4c, 0x1c, 0xef, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -156,6 +443,12 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	// Queries a StoredDevices by index.
+	StoredDevices(ctx context.Context, in *QueryGetStoredDevicesRequest, opts ...grpc.CallOption) (*QueryGetStoredDevicesResponse, error)
+	// Queries a list of StoredDevices items.
+	StoredDevicesAll(ctx context.Context, in *QueryAllStoredDevicesRequest, opts ...grpc.CallOption) (*QueryAllStoredDevicesResponse, error)
+	// Queries a NextDevice by index.
+	NextDevice(ctx context.Context, in *QueryGetNextDeviceRequest, opts ...grpc.CallOption) (*QueryGetNextDeviceResponse, error)
 }
 
 type queryClient struct {
@@ -175,10 +468,43 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) StoredDevices(ctx context.Context, in *QueryGetStoredDevicesRequest, opts ...grpc.CallOption) (*QueryGetStoredDevicesResponse, error) {
+	out := new(QueryGetStoredDevicesResponse)
+	err := c.cc.Invoke(ctx, "/cometa.devices.Query/StoredDevices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) StoredDevicesAll(ctx context.Context, in *QueryAllStoredDevicesRequest, opts ...grpc.CallOption) (*QueryAllStoredDevicesResponse, error) {
+	out := new(QueryAllStoredDevicesResponse)
+	err := c.cc.Invoke(ctx, "/cometa.devices.Query/StoredDevicesAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) NextDevice(ctx context.Context, in *QueryGetNextDeviceRequest, opts ...grpc.CallOption) (*QueryGetNextDeviceResponse, error) {
+	out := new(QueryGetNextDeviceResponse)
+	err := c.cc.Invoke(ctx, "/cometa.devices.Query/NextDevice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	// Queries a StoredDevices by index.
+	StoredDevices(context.Context, *QueryGetStoredDevicesRequest) (*QueryGetStoredDevicesResponse, error)
+	// Queries a list of StoredDevices items.
+	StoredDevicesAll(context.Context, *QueryAllStoredDevicesRequest) (*QueryAllStoredDevicesResponse, error)
+	// Queries a NextDevice by index.
+	NextDevice(context.Context, *QueryGetNextDeviceRequest) (*QueryGetNextDeviceResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -187,6 +513,15 @@ type UnimplementedQueryServer struct {
 
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+}
+func (*UnimplementedQueryServer) StoredDevices(ctx context.Context, req *QueryGetStoredDevicesRequest) (*QueryGetStoredDevicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StoredDevices not implemented")
+}
+func (*UnimplementedQueryServer) StoredDevicesAll(ctx context.Context, req *QueryAllStoredDevicesRequest) (*QueryAllStoredDevicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StoredDevicesAll not implemented")
+}
+func (*UnimplementedQueryServer) NextDevice(ctx context.Context, req *QueryGetNextDeviceRequest) (*QueryGetNextDeviceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NextDevice not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -211,6 +546,60 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_StoredDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetStoredDevicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).StoredDevices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cometa.devices.Query/StoredDevices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).StoredDevices(ctx, req.(*QueryGetStoredDevicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_StoredDevicesAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllStoredDevicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).StoredDevicesAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cometa.devices.Query/StoredDevicesAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).StoredDevicesAll(ctx, req.(*QueryAllStoredDevicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_NextDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetNextDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).NextDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cometa.devices.Query/NextDevice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).NextDevice(ctx, req.(*QueryGetNextDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "cometa.devices.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -218,6 +607,18 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Params",
 			Handler:    _Query_Params_Handler,
+		},
+		{
+			MethodName: "StoredDevices",
+			Handler:    _Query_StoredDevices_Handler,
+		},
+		{
+			MethodName: "StoredDevicesAll",
+			Handler:    _Query_StoredDevicesAll_Handler,
+		},
+		{
+			MethodName: "NextDevice",
+			Handler:    _Query_NextDevice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -280,6 +681,209 @@ func (m *QueryParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGetStoredDevicesRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetStoredDevicesRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetStoredDevicesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetStoredDevicesResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetStoredDevicesResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetStoredDevicesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.StoredDevices.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllStoredDevicesRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllStoredDevicesRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllStoredDevicesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllStoredDevicesResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllStoredDevicesResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllStoredDevicesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.StoredDevices) > 0 {
+		for iNdEx := len(m.StoredDevices) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.StoredDevices[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetNextDeviceRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetNextDeviceRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetNextDeviceRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetNextDeviceResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetNextDeviceResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetNextDeviceResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.NextDevice.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -307,6 +911,82 @@ func (m *QueryParamsResponse) Size() (n int) {
 	var l int
 	_ = l
 	l = m.Params.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryGetStoredDevicesRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetStoredDevicesResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.StoredDevices.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllStoredDevicesRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllStoredDevicesResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.StoredDevices) > 0 {
+		for _, e := range m.StoredDevices {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetNextDeviceRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QueryGetNextDeviceResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.NextDevice.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
@@ -426,6 +1106,510 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if err := m.Params.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetStoredDevicesRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetStoredDevicesRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetStoredDevicesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetStoredDevicesResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetStoredDevicesResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetStoredDevicesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StoredDevices", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.StoredDevices.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllStoredDevicesRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllStoredDevicesRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllStoredDevicesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllStoredDevicesResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllStoredDevicesResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllStoredDevicesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StoredDevices", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StoredDevices = append(m.StoredDevices, StoredDevices{})
+			if err := m.StoredDevices[len(m.StoredDevices)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetNextDeviceRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetNextDeviceRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetNextDeviceRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetNextDeviceResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetNextDeviceResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetNextDeviceResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field NextDevice", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.NextDevice.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

@@ -1,0 +1,9 @@
+syntax = "proto3";
+package cometa.devices;
+
+option go_package = "cometa/x/devices/types";
+
+message NextDevice {
+  uint64 idValue = 1; 
+  
+}

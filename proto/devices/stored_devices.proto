@@ -1,0 +1,26 @@
+syntax = "proto3";
+package cometa.devices;
+
+option go_package = "cometa/x/devices/types";
+
+message StoredDevices {
+  string index = 1; 
+  string deviceAccount = 2; 
+  string deviceClass = 3; 
+  string ownerAddress = 4; 
+  string userAddress = 5; 
+  string escrowAddress = 6; 
+  string manufacturerAddress = 7; 
+  uint64 pricePerUnit = 8; 
+  uint64 commissionPerUnit = 9; 
+  int32 billingPeriod = 10; 
+  int32 totalBilledUnits = 11; 
+  int32 lastPayment = 12; 
+  string metadataUrl = 13; 
+  string metadataHash = 14; 
+  string imageUrl = 15; 
+  string imageHash = 16; 
+  uint64 createdAt = 17; 
+  
+}
+

@@ -3,6 +3,8 @@ package cometa.devices;
 
 import "gogoproto/gogo.proto";
 import "devices/params.proto";
+import "devices/stored_devices.proto";
+import "devices/next_device.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "cometa/x/devices/types";
@@ -10,5 +12,7 @@ option go_package = "cometa/x/devices/types";
 // GenesisState defines the devices module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated StoredDevices storedDevicesList = 2 [(gogoproto.nullable) = false];
+  NextDevice nextDevice = 3;
   // this line is used by starport scaffolding # genesis/proto/state
 }

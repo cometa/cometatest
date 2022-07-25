@@ -35,11 +35,65 @@ ignite scaffold module devices --dep bank
 This command creates the x/devices directory and imports the devices module into the blockchain in the app/app.go directory.
 
 ### Create repo
-Store  project in a git repo:
-```git add .
+Store  project in a git repo and add a tag:
+```
+git add .
 git commit -m "scaffold cometa chain and module"
 
 git remote add origin git@github.com:cometa/cometa.git
 git branch -M main
 git push -u origin main
+
+git tag dev-1
 ```
+### Scaffold the devices KV-store and counter
+```
+ignite scaffold single nextDevice idValue:uint --module devices --no-message
+```
+```
+modify proto/devices/genesis.proto
+create proto/devices/next_device.proto
+modify proto/devices/query.proto
+modify x/devices/client/cli/query.go
+create x/devices/client/cli/query_next_device.go
+create x/devices/client/cli/query_next_device_test.go
+modify x/devices/genesis.go
+modify x/devices/genesis_test.go
+create x/devices/keeper/grpc_query_next_device.go
+create x/devices/keeper/grpc_query_next_device_test.go
+create x/devices/keeper/next_device.go
+create x/devices/keeper/next_device_test.go
+modify x/devices/module.go
+modify x/devices/types/genesis.go
+modify x/devices/types/genesis_test.go
+modify x/devices/types/keys.go
+
+🎉 nextDevice added. 
+```
+
+```
+ignite scaffold map storedDevices device_account:string device_class:string owner_address:string user_address:string escrow_address:string manufacturer_address:string price_per_unit:uint commission_per_unit:uint billing_period:int total_billed_units:int last_payment:int metadata_url:string metadata_hash:string image_url:string image_hash:string created_at:uint --module devices --no-message
+```
+Here `--no-message` prevents device objects from being created or overwritten with a simple sdk.Msg. The application instead creates and updates the objects when receiving properly crafted messages like createDevice().
+```
+modify proto/devices/genesis.proto
+modify proto/devices/query.proto
+create proto/devices/stored_devices.proto
+modify x/devices/client/cli/query.go
+create x/devices/client/cli/query_stored_devices.go
+create x/devices/client/cli/query_stored_devices_test.go
+modify x/devices/genesis.go
+modify x/devices/genesis_test.go
+create x/devices/keeper/grpc_query_stored_devices.go
+create x/devices/keeper/grpc_query_stored_devices_test.go
+create x/devices/keeper/stored_devices.go
+create x/devices/keeper/stored_devices_test.go
+modify x/devices/module.go
+modify x/devices/types/genesis.go
+modify x/devices/types/genesis_test.go
+create x/devices/types/key_stored_devices.go
+
+🎉 storedDevices added. 
+```
+
+

@@ -5,6 +5,8 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "devices/params.proto";
+import "devices/stored_devices.proto";
+import "devices/next_device.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "cometa/x/devices/types";
@@ -15,7 +17,21 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/cometa/devices/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a StoredDevices by index.
+	rpc StoredDevices(QueryGetStoredDevicesRequest) returns (QueryGetStoredDevicesResponse) {
+		option (google.api.http).get = "/cometa/devices/stored_devices/{index}";
+	}
+
+	// Queries a list of StoredDevices items.
+	rpc StoredDevicesAll(QueryAllStoredDevicesRequest) returns (QueryAllStoredDevicesResponse) {
+		option (google.api.http).get = "/cometa/devices/stored_devices";
+	}
+
+// Queries a NextDevice by index.
+	rpc NextDevice(QueryGetNextDeviceRequest) returns (QueryGetNextDeviceResponse) {
+		option (google.api.http).get = "/cometa/devices/next_device";
+	}
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -27,4 +43,27 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
+message QueryGetStoredDevicesRequest {
+	  string index = 1;
+
+}
+
+message QueryGetStoredDevicesResponse {
+	StoredDevices storedDevices = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredDevicesRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredDevicesResponse {
+	repeated StoredDevices storedDevices = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetNextDeviceRequest {}
+
+message QueryGetNextDeviceResponse {
+	NextDevice NextDevice = 1 [(gogoproto.nullable) = false];
+}
 // this line is used by starport scaffolding # 3
